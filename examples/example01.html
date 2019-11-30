@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Example Page 1</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                background-color: green;
+                font-family: sans-serif;
+                color: white;
+            }
+
+            a {
+                color: white;
+                margin-bottom: 40px;
+            }
+
+            .hack-button {
+                -webkit-appearance: none;
+                background: white;
+                border: 0;
+                padding: 16px 32px;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+
+            .parent-hacked-container,
+            .parent-content-container,
+            .parent-url-container {
+                padding: 20px 40px;
+                color: black;
+                background: rgba(255,255,255,.5);
+                margin-bottom: 40px;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <h1>Lorem Ipsum</h1>
+        <a href="example01-hack.html" target="_blank">My Homepage</a>
+        <form>
+            <label>Private Form
+                <input type="text" value="Privat Stuff">
+            </label>
+        </form>
+        <p>Session Id '1234567890' in Cookie!</p>
+        <script>
+        
+        function setCookie(name, value, days) {
+            var d = new Date;
+            d.setTime(d.getTime() + 24*60*60*1000*days);
+            document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
+        }
+
+        setCookie('sessionId', '1234567890', 1)
+        
+        </script>
+    </body>
+</html>
