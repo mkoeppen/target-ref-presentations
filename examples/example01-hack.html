@@ -30,6 +30,7 @@
                 background: rgba(255,255,255,.5);
                 margin-bottom: 40px;
             }
+
             
             code {
                 padding: 4px;
@@ -37,6 +38,14 @@
                 background: white;
             }
 
+            .error {
+                background: lightcoral;
+            }
+            .error:before {
+                content: 'Error';
+                font-weight: bold;
+                display: block;
+            }
 
         </style>
     </head>
@@ -76,7 +85,12 @@
                 hackContentContainer.appendChild(command);
                 const hackResultContainer = document.createElement('div');
                 hackResultContainer.classList = 'parent-url-container';
-                hackResultContainer.innerHTML = window.opener.location.href;
+                try {
+                    hackResultContainer.innerHTML = window.opener.location.href;                    
+                } catch (error) {
+                    hackResultContainer.innerHTML = error;  
+                    hackResultContainer.classList = 'error';
+                }
                 hackContentContainer.appendChild(hackResultContainer);
             }
 
@@ -86,7 +100,12 @@
                 hackContentContainer.appendChild(command);             
                 const hackResultContainer = document.createElement('div');
                 hackResultContainer.classList = 'parent-content-container';
-                hackResultContainer.textContent = window.opener.document.body.innerHTML;
+                try {
+                    hackResultContainer.textContent = window.opener.document.body.innerHTML;                    
+                } catch (error) {
+                    hackResultContainer.innerHTML = error;  
+                    hackResultContainer.classList = 'error';
+                }
                 hackContentContainer.appendChild(hackResultContainer);
             }
 
@@ -96,7 +115,12 @@
                 hackContentContainer.appendChild(command);          
                 const hackResultContainer = document.createElement('div');
                 hackResultContainer.classList = 'parent-content-container';
-                hackResultContainer.textContent = window.opener.document.cookie;
+                try {
+                    hackResultContainer.textContent = window.opener.document.cookie;                    
+                } catch (error) {
+                    hackResultContainer.innerHTML = error;  
+                    hackResultContainer.classList = 'error';
+                }
                 hackContentContainer.appendChild(hackResultContainer);
             }
 
@@ -106,7 +130,12 @@
                 hackContentContainer.appendChild(command);             
                 const hackResultContainer = document.createElement('div');
                 hackResultContainer.classList = 'parent-hacked-container';
-                window.opener.document.body.innerHTML = '<div style="position: fixed; background: #cc0000; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;color: white;"><h1>HACKED</h1><img src="https://media.giphy.com/media/PPi5c8l8WDY7if1L8z/giphy.gif"></div>';
+                try {
+                    window.opener.document.body.innerHTML = '<div style="position: fixed; background: #cc0000; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;color: white;"><h1>HACKED</h1><img src="https://media.giphy.com/media/PPi5c8l8WDY7if1L8z/giphy.gif"></div>';                    
+                } catch (error) {
+                    hackResultContainer.innerHTML = error;  
+                    hackResultContainer.classList = 'error';
+                }
                 hackResultContainer.innerHTML = '<p>Hacked!</p>'
                 hackContentContainer.appendChild(hackResultContainer);
             }
